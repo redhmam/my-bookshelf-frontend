@@ -8,16 +8,16 @@ import Account from './containers/Account';
 function App() {
   return (
     <Router>
-    <Switch>
-      {/* Rotas públicas */}
-      <Route path="/" component={Home} />
-      <Route path="/login" component={Login} exact/>
-      <Route path="/signup" component={SignUp} exact/>
-      <Route path="/account" component={Account}/>
+      <Switch>
+        {/* Rotas públicas */}
+        <Route path="/" component={Home} exact/>
+        <Route path="/login" component={Login} exact/>
+        <Route path="/signup" component={SignUp} exact/>
+        <Route path="/account" component={Account}/>
 
-      {/* Not found 404 */}
-      {/* <Route component={ScreeesNoMatch}/> */}
-    </Switch>
+        {/* Not found 404 */}
+        {/* <Route component={ScreeesNoMatch}/> */}
+      </Switch>
     </Router>
   );
 }
