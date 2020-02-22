@@ -66,7 +66,7 @@ const Account = (props) => {
   return (
     <Layout title="Account" logged>
       <Row className="p-20">
-        <Col span={20} offset={2}>
+        <Col xs={24} sm={{span: 20, offset: 2}}>
           <Card>
             <PageHeader
               style={{padding: `15px 0px`}}

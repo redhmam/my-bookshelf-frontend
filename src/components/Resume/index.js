@@ -53,7 +53,7 @@ export default function resume(props) {
     return (
         <Row className="p-20">
             {books.map(book => 
-            <Col span={4}>
+            <Col xs={12} sm={8} md={6} lg={4} xl={3}>
                 <Card
                     cover={<img alt={book.title} src={book.image} />}
                     bodyStyle={{display: `none`}}

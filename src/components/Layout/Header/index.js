@@ -65,7 +65,7 @@ export default function header(props) {
             {props.logged ?
             <nav>
                 <Link to="/account" title="Redhmam">Redhmam</Link>
-                <Link onClick={handleLogout} title="Logout">Logout</Link>
+                <a href="#" onClick={handleLogout} title="Logout">Logout</a>
             </nav>
             :
             <nav>
