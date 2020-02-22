@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import theme from '../UI/theme';
 import bg from './bg.jpg';
 
@@ -59,7 +60,7 @@ export default function banner() {
             <div>
             <h1>Manage all your books.</h1>
             <h2>You can organize by favorite, read or want to read</h2>
-            <a href="/signup" title="Get Start">Get Start</a>
+            <Link to="/signup" title="Get Start">Get Start</Link>
             </div>
         </Banner>
     )

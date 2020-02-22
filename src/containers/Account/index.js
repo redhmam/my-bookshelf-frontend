@@ -2,12 +2,12 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
 
-const Home = () => {
+const Account = () => {
   return (
-    <Layout title="Home">
+    <Layout title="Account">
       <Banner/>
     </Layout>
   );
 }
 
-export default Home;
+export default Account;

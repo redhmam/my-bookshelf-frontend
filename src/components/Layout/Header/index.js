@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import theme from '../../UI/theme';
 
 const Header = styled.header`
@@ -53,10 +54,10 @@ const Header = styled.header`
 export default function header() {
     return (
         <Header>
-            <div className="title"><a href="/" title="MyBookShelf">MyBookShelf</a></div>
+            <div className="title"><Link to="/" title="MyBookShelf">MyBookShelf</Link></div>
             <nav>
-                <a href="/login" title="Login">Login</a>
-                <a href="/signup" title="Sign Up">Sign Up</a>
+                <Link to="/login" title="Login">Login</Link>
+                <Link to="/signup" title="Sign Up">Sign Up</Link>
             </nav>
         </Header>
     )

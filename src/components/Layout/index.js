@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import "antd/dist/antd.css";
 import theme from '../UI/theme';
 import Header from './Header';
 import Footer from './Footer';
 
-const Layout = styled.div`
+const LayoutStyle = styled.div`
   background-color: ${theme.mainColor};
 `
 
-export default function layout(props) {
+export default function Layout(props) {
   const { children } = props;
+
+  useEffect(() => {
+    document.title = `${props.title} | MyBookShelf`;
+  });
+
   return (
-    <Layout>
+    <LayoutStyle>
       <Header/>
       {children}
       <Footer/>
-    </Layout>
+    </LayoutStyle>
   )
 }
