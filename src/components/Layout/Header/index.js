@@ -9,6 +9,7 @@ const Header = styled.header`
   line-height: 64px;
   background-color: ${theme.mainColor};
   position: fixed;
+  top: 0px;
   width: 100%;
   z-index: 999;
 

@@ -14,3 +14,7 @@ body {
   background: #FFCC33;
   overflow: hidden;
 }
+
+.p-40{
+  padding: 60px;
+}
