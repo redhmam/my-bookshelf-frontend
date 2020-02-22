@@ -54,7 +54,7 @@ const SignUp = (props) => {
   return (
     <Layout title="SignUp">
       <Row className="p-60">
-        <Col span={12} offset={6}>
+        <Col xs={24} sm={{span: 12, offset: 6}}>
           <Card>
             <Form {...formItemLayout} onSubmit={handleSubmit}>
               <Form.Item {...tailFormItemLayout}>
