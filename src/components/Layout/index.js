@@ -37,7 +37,7 @@ export default function Layout(props) {
   return (
     <div>
       <LayoutStyle>
-        <Header/>
+        <Header {...props}/>
         {children}
       </LayoutStyle>
       <Footer/>

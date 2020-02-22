@@ -43,7 +43,7 @@ export default function banner() {
         <Banner>
             <div>
             <h1>Manage all your books.</h1>
-            <h2>You can organize by favorite, read or want to read</h2>
+            <h2>You can organize by favorite, reading, want to read or read</h2>
             <Link to="/signup" title="Get Start">Get Start</Link>
             </div>
         </Banner>

@@ -31,6 +31,7 @@ const Header = styled.header`
   nav {
     float: right;
     text-align: right;
+    width: 50%;
 
     a{
       color: #212121;
@@ -52,14 +53,26 @@ const Header = styled.header`
   }
 `
 
-export default function header() {
+export default function header(props) {
+
+    const handleLogout = () => {
+
+    }
+
     return (
         <Header>
             <div className="title"><Link to="/" title="MyBookShelf">MyBookShelf</Link></div>
+            {props.logged ?
+            <nav>
+                <Link to="/account" title="Redhmam">Redhmam</Link>
+                <Link onClick={handleLogout} title="Logout">Logout</Link>
+            </nav>
+            :
             <nav>
                 <Link to="/login" title="Login">Login</Link>
                 <Link to="/signup" title="Sign Up">Sign Up</Link>
             </nav>
+            }
         </Header>
     )
 }

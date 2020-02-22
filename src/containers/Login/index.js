@@ -34,7 +34,7 @@ const Login = (props) => {
 
   return (
     <Layout title="Login">
-      <Row className="p-40">
+      <Row className="p-60">
         <Col span={12} offset={6}>
           <Card>
             <Form {...formItemLayout} onSubmit={handleSubmit}>
