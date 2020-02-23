@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Layout from '../../components/Layout';
 import List from '../../components/Resume';
+import get from 'lodash/get';
 
 import {
   Card,
@@ -18,50 +20,12 @@ const { TabPane } = Tabs;
 
 const Account = (props) => {
 
-  const favorites = [
-    {
-      title: 'Book title',
-      autor: 'Book autor',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/51CTIr1bJxL._SX325_BO1,204,203,200_.jpg',
-      isFavorite: true,
-      list: 'reading'
-    }
-  ];
+  const { books } = props;
 
-  const reading = [
-    {
-      title: 'Book title',
-      autor: 'Book autor',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/51CTIr1bJxL._SX325_BO1,204,203,200_.jpg',
-      isFavorite: true,
-      list: 'reading'
-    }
-  ];
-
-  const wantToRead = [
-    {
-      title: 'Book title',
-      autor: 'Book autor',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/51CTIr1bJxL._SX325_BO1,204,203,200_.jpg',
-      isFavorite: true,
-      list: 'reading'
-    }
-  ];
-  
-
-  const read = [
-    {
-      title: 'Book title',
-      autor: 'Book autor',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/51CTIr1bJxL._SX325_BO1,204,203,200_.jpg',
-      isFavorite: true,
-      list: 'reading'
-    }
-  ];
-
-  const handleTabChange = () => {
-
-  }
+  const favorites = books.filter(book => book.is_favorite===1);
+  const reading = books.filter(book => book.list===0);
+  const wantToRead = books.filter(book => book.list===1);
+  const read = books.filter(book => book.list===2);
 
   return (
     <Layout title="Account" logged>
@@ -73,7 +37,7 @@ const Account = (props) => {
               title="My Books"
               subTitle="You can organize by favorite, reading, want to read or read"
             />
-            <Tabs defaultActiveKey="1" onChange={handleTabChange}>
+            <Tabs defaultActiveKey="1">
               <TabPane tab={<span>Favorites <Badge count={favorites.length}/></span>} key="1">
                 <List 
                   name="Favorites"
@@ -106,4 +70,10 @@ const Account = (props) => {
   );
 }
 
-export default Account;
+const mapStateToProps = state => ({
+  books: get(state, 'books.books', []),
+  fetched: get(state, 'books.fetched'),
+  loading: get(state, 'books.loading'),
+})
+
+export default connect(mapStateToProps)(Account);

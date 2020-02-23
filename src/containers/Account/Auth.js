@@ -5,14 +5,22 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 
 import * as accountActions from './actions';
+import * as bookActions from '../Books/actions';
 
 const Auth = (props) => {
+
+    const {
+        loadBooks
+    } = props;
 
     if(localStorage.getItem('api_token') === null){
         props.history.push('/');
     }else if(!props.fetched){
         props.history.push('/');
     }
+
+    loadBooks();
+    
     // else{
     //   props.loadUser();
     //   return(<div>loading...</div>);
@@ -32,6 +40,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchProps = dispatch => ({
     loadUser: () => dispatch(accountActions.loadUser()),
+    loadBooks: () => dispatch(bookActions.loadAll()),
 });
   
 export default connect(mapStateToProps, mapDispatchProps)(withRouter(Auth));

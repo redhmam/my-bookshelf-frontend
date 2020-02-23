@@ -3,9 +3,17 @@ import get from 'lodash/get';
 
 const ACTION_HANDLERS = {
 
+    ['@@BOOKS/ALL_SUCCESS']: (state, action) => {
+        return update(state, {
+            books: { $set: get(action, 'payload.data.books') },
+            loading: { $set: false },
+            fetched: { $set: true }
+        })
+    },
+
     ['@@BOOKS/CREATE_SUCCESS']: (state, action) => {
         return update(state, {
-            books: { $push: get(action, 'payload.data.user') },
+            books: { $push: get(action, 'payload.data.book') },
             loading: { $set: false },
             fetched: { $set: true }
         })
@@ -14,7 +22,7 @@ const ACTION_HANDLERS = {
 }
 
 const defaultState = {
-    books: null,
+    books: [],
     loading: false,
     fetched: false
 };

@@ -10,10 +10,12 @@ import { client, options } from './components/Instance';
 
 import search from './containers/Search/reducer';
 import account from './containers/Account/reducer';
+import books from './containers/Books/reducer';
 
 const reducers = {
     search,
-    account
+    account,
+    books
 }
 
 let composeEnhancers = compose;

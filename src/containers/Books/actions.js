@@ -8,3 +8,13 @@ export const create = (data) => ({
         }
     }
 });
+
+export const loadAll = () => ({
+    type: '@@BOOKS/ALL',
+    payload: {
+        request:{
+            method: 'get',
+            url:`/books`,
+        }
+    }
+});
