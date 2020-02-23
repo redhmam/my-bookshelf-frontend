@@ -25,6 +25,20 @@ const ACTION_HANDLERS = {
         })
     },
 
+    ['@@USER/SIGNUP']: (state) => {
+        return update(state, {
+            loading: { $set: true }
+        })
+    },
+
+    ['@@USER/SIGNUP_SUCCESS']: (state, action) => {
+        return update(state, {
+            user: { $set: get(action, 'payload.data.user') },
+            loading: { $set: false },
+            fetched: { $set: true }
+        })
+    },
+
 }
 
 const defaultState = {

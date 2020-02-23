@@ -1,5 +1,8 @@
 import React from 'react';
 import Layout from '../../components/Layout';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import get from 'lodash/get';
 
 import {
   Card,
@@ -14,11 +17,14 @@ import {
 
 import { 
   Button, 
-  formItemLayout, 
+  formItemLayout,
   tailFormItemLayout
 } from '../../components/UI';
 
+import * as accountActions from '../Account/actions';
+
 const { Title } = Typography;
+
 
 const SignUp = (props) => {
 
@@ -34,19 +40,15 @@ const SignUp = (props) => {
     }
   };
 
-  // const validateToNextPassword = (rule, value, callback) => {
-  //   const { form } = this.props;
-  //   if (value && this.state.confirmDirty) {
-  //     form.validateFields(['confirm'], { force: true });
-  //   }
-  //   callback();
-  // };
-
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        props.signUp(values)
+        .then(response => {
+          localStorage.setItem('api_token', get(response, 'data.user.api_token'));
+          props.history.push('/account');
+        });
       }
     });
   }
@@ -124,4 +126,8 @@ const SignUp = (props) => {
   );
 }
 
-export default Form.create({ name: 'SignUp' })(SignUp);
+const mapDispatchProps = dispatch => ({
+  signUp: (payload) => dispatch(accountActions.signUp(payload)),
+});
+
+export default connect(null, mapDispatchProps)(Form.create({ name: 'SignUp' })(withRouter(SignUp)));

@@ -44,6 +44,9 @@ export const options = {
 
             if(error.response.status === 422 && error.response.data.response !== undefined){
                 message.error(error.response.data.response);
+            }else if(error.response.status === 422){
+                // const data = get(error, 'response.data', []);
+                // data.map(d => message.error(d[0]));
             }else if(error.response.status === 401){
                 message.error('You need to login!');
             }else if(error.response.status === 500){
