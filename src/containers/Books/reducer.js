@@ -13,9 +13,15 @@ const ACTION_HANDLERS = {
 
     ['@@BOOKS/CREATE_SUCCESS']: (state, action) => {
         return update(state, {
-            books: { $push: get(action, 'payload.data.book') },
+            books: (oldBooks) => [get(action, 'payload.data.book'), oldBooks],
             loading: { $set: false },
             fetched: { $set: true }
+        })
+    },
+
+    ['@@BOOKS/DELETE_SUCCESS']: (state, action) => {
+        return update(state, {
+            books: (oldBooks) => oldBooks.filter(b => b.id !== get(action, 'meta.previousAction.payload.id'))
         })
     },
 
