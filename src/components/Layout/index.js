@@ -9,9 +9,13 @@ import bg from './bg.jpg';
 const LayoutStyle = styled.div`
   background-color: ${theme.mainColor};
   min-height: calc(100vh - 51px);
-  padding-top: 64px;
+  padding-top: ${props => props.logged ? '126px': '64px'};
   position: relative;
   z-index: 1;
+
+  @media only screen and (min-width: 768px) {
+    padding-top: 64px;
+  }
 
   :before {
     content: "";
@@ -36,7 +40,7 @@ export default function Layout(props) {
 
   return (
     <div>
-      <LayoutStyle>
+      <LayoutStyle {...props}>
         <Header {...props}/>
         {children}
       </LayoutStyle>

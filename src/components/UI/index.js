@@ -1,5 +1,6 @@
 export { default as Button } from './Button';
 export { default as Badge } from './Badge';
+export { default as Book } from './Book';
 
 export const formItemLayout = {
     labelCol: {
@@ -10,7 +11,7 @@ export const formItemLayout = {
       xs: { span: 24 },
       sm: { span: 16 },
     },
-  };
+};
 export const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -22,4 +23,4 @@ export const tailFormItemLayout = {
         offset: 8,
       },
     },
-  };
+};

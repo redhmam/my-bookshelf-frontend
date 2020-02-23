@@ -1,16 +1,18 @@
 import React from 'react';
 
 import {
-    Card,
     Row,
     Col,
-    PageHeader,
     Icon,
     Modal,
     Tooltip,
     Dropdown,
     Menu
   } from 'antd';
+
+import {
+    Book
+} from '../UI';
   
 const { confirm } = Modal;
 
@@ -52,9 +54,9 @@ export default function resume(props) {
     
     return (
         <Row className="p-20">
-            {books.map(book => 
-            <Col xs={12} sm={8} md={6} lg={4} xl={3}>
-                <Card
+            {books.map((book, index) => 
+            <Col xs={12} sm={8} md={6} lg={4} xl={3} key={index}>
+                <Book
                     cover={<img alt={book.title} src={book.image} />}
                     bodyStyle={{display: `none`}}
                     actions={[
@@ -71,7 +73,7 @@ export default function resume(props) {
                         </Tooltip>,
                     ]}
                 >
-                </Card>
+                </Book>
             </Col>
             )}
         </Row>
