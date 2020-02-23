@@ -29,3 +29,16 @@ export const deleteBook = (id) => ({
         id
     }
 });
+
+export const changeBookList = (id, list) => ({
+    type: '@@BOOKS/UPDATE',
+    payload: {
+        request:{
+            method: 'put',
+            url:`/books/${id}/list`,
+            data: {
+                list
+            }
+        }
+    }
+})

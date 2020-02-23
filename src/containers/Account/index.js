@@ -22,10 +22,12 @@ const Account = (props) => {
 
   const { books } = props;
 
+  const activeList = get(props, 'match.params.list', 'favorites');
+
   const favorites = books.filter(book => book.is_favorite===1);
-  const reading = books.filter(book => book.list===0);
-  const wantToRead = books.filter(book => book.list===1);
-  const read = books.filter(book => book.list===2);
+  const reading = books.filter(book => book.list==='0');
+  const wantToRead = books.filter(book => book.list==='1');
+  const read = books.filter(book => book.list==='2');
 
   return (
     <Layout title="Account" logged>
@@ -37,23 +39,23 @@ const Account = (props) => {
               title="My Books"
               subTitle="You can organize by favorite, reading, want to read or read"
             />
-            <Tabs defaultActiveKey="1">
-              <TabPane tab={<span>Favorites <Badge count={favorites.length}/></span>} key="1">
+            <Tabs defaultActiveKey={activeList}>
+              <TabPane tab={<span>Favorites <Badge count={favorites.length}/></span>} key="favorites">
                 <List 
                   books={favorites}
                 />
               </TabPane>
-              <TabPane tab={<span>Reading <Badge count={reading.length}/></span>}  key="2">
+              <TabPane tab={<span>Reading <Badge count={reading.length}/></span>}  key="reading">
                 <List 
                   books={reading}
                 />
               </TabPane>
-              <TabPane tab={<span>Want to read <Badge count={wantToRead.length}/></span>}  key="3">
+              <TabPane tab={<span>Want to read <Badge count={wantToRead.length}/></span>}  key="want-to-read">
                 <List 
                   books={wantToRead}
                 />
               </TabPane>
-              <TabPane tab={<span>Read <Badge count={read.length}/></span>}  key="4">
+              <TabPane tab={<span>Read <Badge count={read.length}/></span>}  key="read">
                 <List 
                   books={read}
                 />

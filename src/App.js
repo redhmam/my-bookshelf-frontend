@@ -17,7 +17,8 @@ function App() {
         <Route path="/login" component={Login} exact/>
         <Route path="/signup" component={SignUp} exact/>
         <Auth path="/account/search" component={Search} exact/>
-        <Auth path="/account" component={Account}/>
+        <Auth path="/account" component={Account} exact/>
+        <Auth path="/account/:list" component={Account}/>
 
         {/* Not found 404 */}
         {/* <Route component={ScreeesNoMatch}/> */}

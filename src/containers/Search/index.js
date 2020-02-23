@@ -37,31 +37,26 @@ const Search = (props) => {
     const getBookTitle = (book) => get(book, 'volumeInfo.title');
     const getBookImage = (book) => get(book, 'volumeInfo.imageLinks.smallThumbnail');
 
-    const setToFavorite = (book) => {
+    const getListPath = (list) => {
+      switch(list){
+        case '0': return 'reading';
+        case '1': return 'want-to-read';
+        case '2': return 'read';
+        default: console.log(`List ${list} is not defined`);
+      }
+    }
+
+    const createBookByList = (book, list) => {
       props.createBook({
         bid: getBookId(book),
         title: getBookTitle(book),
         image: getBookImage(book),
-        is_favorite: 1,
-        list: null
+        is_favorite: 0,
+        list
       });
-      props.history.push('/account/favorites');
+      props.history.push(`/account/${getListPath(list)}`);
     }
     
-    const menu = (
-        <Menu>
-            <Menu.Item key="0">
-                Reading
-            </Menu.Item>
-            <Menu.Item key="1">
-                Want to read
-            </Menu.Item>
-            <Menu.Item key="3">
-                Read
-            </Menu.Item>
-        </Menu>
-    );
-
   return (
     <Layout title="Seach books" logged>
       <Row className="p-20">
@@ -78,14 +73,23 @@ const Search = (props) => {
                 <Book
                     cover={<img alt={getBookTitle(book)} src={getBookImage(book)} />}
                     actions={[
-                        <Dropdown overlay={menu} trigger={['click']}>
+                        <Dropdown overlay={
+                          <Menu onClick={(e) => createBookByList(book, e.key)}>
+                            <Menu.Item key="0">
+                                Reading
+                            </Menu.Item>
+                            <Menu.Item key="1">
+                                Want to read
+                            </Menu.Item>
+                            <Menu.Item key="2">
+                                Read
+                            </Menu.Item>
+                        </Menu>
+                      } trigger={['click']}>
                             <Tooltip title="Add to list">
                                 <Icon type="plus" key="list"/>
                             </Tooltip>
-                        </Dropdown>,
-                        <Tooltip title="Set to favorite">
-                            <Icon type="star" key="favorite" onClick={() => setToFavorite(book)}/>
-                        </Tooltip>
+                        </Dropdown>
                     ]}
                 >
                 </Book>
