@@ -21,6 +21,8 @@ const Auth = (props) => {
         loadUser();
         loadBooks();
         return(<Skeleton loading={true}/>);
+    }else{
+        loadBooks();
     }
   
     return (<Route {...props}/>)
