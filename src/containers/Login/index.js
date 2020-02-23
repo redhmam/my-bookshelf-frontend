@@ -1,5 +1,8 @@
 import React from 'react';
 import Layout from '../../components/Layout';
+import { connect } from 'react-redux';
+import get from 'lodash/get';
+import { withRouter } from 'react-router';
 
 import {
   Card,
@@ -16,6 +19,8 @@ import {
   tailFormItemLayout
 } from '../../components/UI';
 
+import * as accountActions from '../Account/actions';
+
 const { Title } = Typography;
 
 const Login = (props) => {
@@ -27,7 +32,11 @@ const Login = (props) => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        props.login(values)
+        .then(response => {
+          localStorage.setItem('api_token', get(response, 'data.user.api_token'));
+          props.history.push('/account');
+        });
       }
     });
   }
@@ -44,10 +53,10 @@ const Login = (props) => {
               <Form.Item label="E-mail">
                 {getFieldDecorator('email', {
                   rules: [
-                    {
-                      type: 'email',
-                      message: 'The input is not valid E-mail!',
-                    },
+                    // {
+                    //   type: 'email',
+                    //   message: 'The input is not valid E-mail!',
+                    // },
                     {
                       required: true,
                       message: 'Please input your E-mail!',
@@ -78,4 +87,8 @@ const Login = (props) => {
   );
 }
 
-export default Form.create({ name: 'Login' })(Login);
+const mapDispatchProps = dispatch => ({
+  login: (payload) => dispatch(accountActions.login(payload)),
+});
+
+export default connect(null, mapDispatchProps)(Form.create({ name: 'Login' })(withRouter(Login)));

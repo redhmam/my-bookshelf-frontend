@@ -6,11 +6,14 @@ import axiosMiddleware from 'redux-axios-middleware';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { client, options } from './components/Instance';
 
 import search from './containers/Search/reducer';
+import account from './containers/Account/reducer';
 
 const reducers = {
     search,
+    account
 }
 
 let composeEnhancers = compose;
@@ -26,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(
     combineReducers(reducers), 
-    // composeEnhancers(applyMiddleware(axiosMiddleware(client, options))), 
+    composeEnhancers(applyMiddleware(axiosMiddleware(client, options))), 
 );
 
 ReactDOM.render(

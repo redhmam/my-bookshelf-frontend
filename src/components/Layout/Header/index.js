@@ -5,6 +5,8 @@ import { Row, Col, Input } from 'antd';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import get from 'lodash/get';
+import * as accountActions from '../../../containers/Account/actions';
 import * as searchActions from '../../../containers/Search/actions';
 import theme from '../../UI/theme';
 
@@ -64,8 +66,12 @@ const HeaderStyled = styled.header`
 
 const Header = (props) => {
 
+    const { user } = props;
+
     const handleLogout = () => {
+      localStorage.removeItem('api_token');
       props.history.push('/');
+      props.logout();
     }
 
     const handleSearch = (val) => {
@@ -97,7 +103,7 @@ const Header = (props) => {
                 </Col>
                 <Col xs={20} sm={18}>
                 <nav>
-                    <Link to="/account" title="Redhmam">Redhmam</Link>
+                    <Link to="/account" title={user.name}>{user.name}</Link>
                     <a href="#" onClick={handleLogout} title="Logout">Logout</a>
                 </nav>
                 </Col>
@@ -110,7 +116,7 @@ const Header = (props) => {
             </nav>
             }
           </Row>
-          {props.logged && (
+          {props.fetched && (
           <Row>
             <Col xs={24} sm={0} className="text-center">
               <Search
@@ -125,12 +131,14 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => ({
-
+  user: get(state, 'account.user'),
+  fetched: get(state, 'account.fetched')
 })
 
 const mapDispatchProps = dispatch => ({
+  logout: () => dispatch(accountActions.logout()),
   searchBook: (payload) => dispatch(searchActions.searchBook(payload)),
   setResultBooks: (payload) => dispatch(searchActions.setResultBooks(payload)),
 });
 
-export default  connect(null, mapDispatchProps)(withRouter(Header));
+export default  connect(mapStateToProps, mapDispatchProps)(withRouter(Header));
