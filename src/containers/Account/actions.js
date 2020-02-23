@@ -24,3 +24,13 @@ export const signUp = (data) => ({
         }
     }
 });
+
+export const loadUser = () => ({
+    type: '@@USER/LOAD',
+    payload: {
+        request:{
+            method: 'get',
+            url:`/user`,
+        }
+    }
+});
