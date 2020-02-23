@@ -42,3 +42,16 @@ export const changeBookList = (id, list) => ({
         }
     }
 })
+
+export const setFavorite = (id, favorite) => ({
+    type: '@@BOOKS/FAVORITE',
+    payload: {
+        request:{
+            method: 'put',
+            url:`/books/${id}/favorite`,
+            data: {
+                favorite
+            }
+        }
+    }
+})

@@ -18,7 +18,12 @@ import {
 const { confirm } = Modal;
 
 const Book = (props) => {
-    const { data, changeBookList } = props;
+    const { 
+        data, 
+        changeBookList,
+        setFavorite,
+        activelist
+    } = props;
 
     const showDeleteConfirm = (data) => {
         confirm({
@@ -29,9 +34,7 @@ const Book = (props) => {
           cancelText: 'No',
           onOk() {
             props.deleteBook(data.id)
-          },
-        //   onCancel() {
-        //   },
+          }
         });
     }
 
@@ -57,7 +60,9 @@ const Book = (props) => {
 
     const actions = [];
 
-    if(!data.is_favorite){
+    console.log(activelist);
+
+    if(activelist !== 'favorites'){
         actions.push(
             <Dropdown overlay={menu} trigger={['click']}>
                 <Tooltip title="Change list">
@@ -65,11 +70,22 @@ const Book = (props) => {
                 </Tooltip>
             </Dropdown>
         );
-        actions.push(
-            <Tooltip title="Set to favorite">
-                <Icon type="star" key="favorite"/>
-            </Tooltip>
-        );
+
+        if(!data.is_favorite){
+        
+            actions.push(
+                <Tooltip title="Set to favorite">
+                    <Icon type="star" key="favorite" onClick={() => setFavorite(data.id, 1)}/>
+                </Tooltip>
+            );
+        }else{
+            actions.push(
+                <Tooltip title="Remove favorite">
+                    <Icon type="star" theme="filled" key="favorite" onClick={() => setFavorite(data.id, 0)}/>
+                </Tooltip>
+            );
+        }
+
         actions.push(
             <Tooltip title="Delete">
                     <Icon type="delete" key="delete" onClick={() => showDeleteConfirm(data)}/>
@@ -78,7 +94,7 @@ const Book = (props) => {
     }else{
         actions.push(
             <Tooltip title="Remove favorite">
-                <Icon type="star" key="favorite"/>
+                <Icon type="star" theme="filled" key="favorite" onClick={() => setFavorite(data.id, 0)}/>
             </Tooltip>
         );
     }
@@ -93,7 +109,8 @@ const Book = (props) => {
 
 const mapDispatchProps = dispatch => ({
     deleteBook: (id) => dispatch(bookActions.deleteBook(id)),
-    changeBookList: (id, newlist) => dispatch(bookActions.changeBookList(id, newlist))
+    changeBookList: (id, newlist) => dispatch(bookActions.changeBookList(id, newlist)),
+    setFavorite: (id, param) => dispatch(bookActions.setFavorite(id, param))
 });
 
 export default connect(null, mapDispatchProps)(Book);

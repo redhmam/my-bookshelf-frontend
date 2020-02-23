@@ -35,6 +35,16 @@ const ACTION_HANDLERS = {
         })
     },
 
+    ['@@BOOKS/FAVORITE_SUCCESS']: (state, action) => {
+
+        const bookId = get(action, 'payload.data.book.id');
+        const bookUpdated = get(action, 'payload.data.book');
+
+        return update(state, {
+            books: (oldBooks) => oldBooks.map(b => b.id !== bookId ? b : bookUpdated)
+        })
+    },
+
 }
 
 const defaultState = {
