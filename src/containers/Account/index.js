@@ -45,24 +45,28 @@ const Account = (props) => {
             <Tabs defaultActiveKey={activeList} onChange={handleChangeTab}>
               <TabPane tab={<span>Favorites <Badge count={favorites.length}/></span>} key="favorites">
                 <List 
+                  name='favorites'
                   books={favorites}
                   activeList={activeList}
                 />
               </TabPane>
               <TabPane tab={<span>Reading <Badge count={reading.length}/></span>}  key="reading">
                 <List 
+                  name='reading'
                   books={reading}
                   activeList={activeList}
                 />
               </TabPane>
               <TabPane tab={<span>Want to read <Badge count={wantToRead.length}/></span>}  key="want-to-read">
                 <List 
+                  name='want to read'
                   books={wantToRead}
                   activeList={activeList}
                 />
               </TabPane>
               <TabPane tab={<span>Read <Badge count={read.length}/></span>}  key="read">
                 <List 
+                  name='read'
                   books={read}
                   activeList={activeList}
                 />
