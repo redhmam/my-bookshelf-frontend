@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import get from 'lodash/get';
 
 import {
@@ -20,6 +21,8 @@ import {
     Book,
 } from '../../components/UI';
 
+import * as bookActions from '../../containers/Books/actions';
+
 const Search = (props) => {
 
     const { 
@@ -33,6 +36,17 @@ const Search = (props) => {
     const getBookId = (book) => get(book, 'id');
     const getBookTitle = (book) => get(book, 'volumeInfo.title');
     const getBookImage = (book) => get(book, 'volumeInfo.imageLinks.smallThumbnail');
+
+    const setToFavorite = (book) => {
+      props.createBook({
+        bid: getBookId(book),
+        title: getBookTitle(book),
+        image: getBookImage(book),
+        is_favorite: 1,
+        list: null
+      });
+      props.history.push('/account/favorites');
+    }
     
     const menu = (
         <Menu>
@@ -70,7 +84,7 @@ const Search = (props) => {
                             </Tooltip>
                         </Dropdown>,
                         <Tooltip title="Set to favorite">
-                            <Icon type="star" key="favorite"/>
+                            <Icon type="star" key="favorite" onClick={() => setToFavorite(book)}/>
                         </Tooltip>
                     ]}
                 >
@@ -100,6 +114,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchProps = dispatch => ({
+  createBook: (payload) => dispatch(bookActions.create(payload)),
 });
 
-export default  connect(mapStateToProps, mapDispatchProps)(Search);
+export default  connect(mapStateToProps, mapDispatchProps)(withRouter(Search));
