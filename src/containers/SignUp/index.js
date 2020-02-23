@@ -46,7 +46,7 @@ const SignUp = (props) => {
       if (!err) {
         props.signUp(values)
         .then(response => {
-          localStorage.setItem('api_token', get(response, 'data.user.api_token'));
+          localStorage.setItem('api_token', get(response, 'payload.data.user.api_token'));
           props.history.push('/account');
         });
       }
