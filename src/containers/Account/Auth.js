@@ -16,7 +16,7 @@ const Auth = (props) => {
     } = props;
 
     if(localStorage.getItem('api_token') === null){
-        props.history.push('/');
+        props.history.push('/login');
         return(<Skeleton loading={true}/>);
     }else if(!props.fetched){
         loadUser();
