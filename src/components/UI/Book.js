@@ -4,7 +4,11 @@ import { Card } from 'antd';
 
 const Book = styled(Card)`
     .ant-card-cover img{
-        height: 220px;
+        height: 160px;
+
+        @media only screen and (min-width: 768px) {
+            height: 220px;
+        }
     }
     .ant-card-body{
         display: none;
