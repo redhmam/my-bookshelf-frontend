@@ -49,6 +49,7 @@ export const options = {
                 // data.map(d => message.error(d[0]));
             }else if(error.response.status === 401){
                 message.error('You need to login!');
+                window.location = '/login';
             }else if(error.response.status === 500){
                 message.error('Something is wrong, please try again.');
             }
