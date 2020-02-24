@@ -86,6 +86,11 @@ const Header = (props) => {
       })
     }
 
+    const getFirstName = (name) => {
+      const fullname = name.split(' ');
+      return fullname[0];
+    }
+
     return (
         <HeaderStyled>
           <Row>
@@ -103,7 +108,7 @@ const Header = (props) => {
                 </Col>
                 <Col xs={20} sm={18}>
                 <nav>
-                    <Link to="/account" title={user.name}>{user.name}</Link>
+                    <Link to="/account" title={user.name}>{getFirstName(user.name)}</Link>
                     <a href="#" onClick={handleLogout} title="Logout">Logout</a>
                 </nav>
                 </Col>
