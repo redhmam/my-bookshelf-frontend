@@ -17,6 +17,7 @@ const Auth = (props) => {
 
     if(localStorage.getItem('api_token') === null){
         props.history.push('/');
+        return(<Skeleton loading={true}/>);
     }else if(!props.fetched){
         loadUser();
         loadBooks();
